@@ -1,8 +1,9 @@
 const buttonEl = document.querySelector("#get-info-button");
-
+const fromDateInputEl = document.querySelector("#from-date");
+const toDateInputEl = document.querySelector("#to-date");
 
 buttonEl.addEventListener("click", function() {
-  axios.get("http://api.coindesk.com/v1/bpi/historical/close.json")
+  axios.get(`http://api.coindesk.com/v1/bpi/historical/close.json?start=${fromDateInputEl.value}&end=${toDateInputEl.value}`)
     .then(function(bitcoinData) {
       console.log(bitcoinData)
       const labels = Object.keys(bitcoinData.data.bpi)
@@ -25,8 +26,6 @@ buttonEl.addEventListener("click", function() {
         document.getElementById('myChart'),
         config
       );
-
-
 
     })
     .catch(err => console.log(err))
